@@ -1,14 +1,46 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      หน้าหลัก | {{timeString}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-   Mookkies
+
+<ion-content padding>
+<div class="row">
+    <div class="col"> 
+      <h2 class ="text-danger">Status : {{status ? "เปิด" : "ปิด"}}</h2>
+    </div>
+  <div class="col text-right">
+      <ion-toggle color="danger" [(ngModel)]="status" (ionChange)="switch()"></ion-toggle>
+  </div>
+</div>
+<br />
+<div class="row">
+  <div class="col">
+    <ngx-gauge [type]="'arch'" 
+      [value]="temperature" 
+      [label]="'อุณหภูมิ'"  
+      [append]="'°C'">
+    </ngx-gauge>
+  </div>
+  <br />
+  <div class="col">
+      <ngx-gauge [type]="'arch'" 
+      [value]="humidity" 
+      [label]="'ความชื้น'"  
+      [append]="'%'">
+  </ngx-gauge>
+  </div>
+</div>
+
+
+  <ion-item lines="full">
+    <ion-label>ตั้งเวลา 1</ion-label>
+    <ion-datetime displayFormat="HH:mm" (ionChange)="getTime(timeSelect.value)" #timeSelect></ion-datetime>
+  </ion-item>
 </ion-content>
